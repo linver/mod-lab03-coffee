@@ -1,26 +1,26 @@
+// Copyright 2022 UNN-IASR
 #include <iostream>
 #include <string>
 #include "Automata.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 
-Automata::Automata()
-{
-    state = OFF; 
+
+Automata::Automata() {
+    state = OFF;
     cash = 0;
     option = 0;
     getState();
 }
 
-void Automata::getMenu()
-{
+void Automata::getMenu() {
     for (int i = 0; i < 10; i++) {
         cout << i+1 << ": "<< menu[i] << " - " << prices[i] << endl;
     }
 }
 
-void Automata::on()
-{
+void Automata::on() {
     if (state == OFF) {
         state = WAIT;
         cout << "The drink machine is on." << endl;
@@ -29,26 +29,23 @@ void Automata::on()
     }
 }
 
-void Automata::off()
-{
+void Automata::off() {
     if (state == WAIT) {
         state = OFF;
         getState();
     }
 }
 
-void Automata::coin(int money)
-{
-    if (state == WAIT or state == ACCEPT) {
+void Automata::coin(int money) {
+    if (state == WAIT || state == ACCEPT) {
         state = ACCEPT;
         cash += money;
         getState();
-    } 
+    }
 }
 
-void Automata::cancel()
-{
-    if (state == ACCEPT or state == CHECK) {
+void Automata::cancel() {
+    if (state == ACCEPT || state == CHECK) {
         state = WAIT;
         cout << "You need more money to buy this drink." << endl;
         getCash();
@@ -56,8 +53,7 @@ void Automata::cancel()
     }
 }
 
-void Automata::choice(int menu_position)
-{
+void Automata::choice(int menu_position) {
     if (state == ACCEPT) {
         state = CHECK;
         option = menu_position;
@@ -66,8 +62,7 @@ void Automata::choice(int menu_position)
     }
 }
 
-bool Automata::check()
-{
+bool Automata::check() {
     if (state == CHECK) {
         if (cash >= prices[option]) {
             return true;
@@ -75,11 +70,9 @@ bool Automata::check()
     }
     getState();
     return false;
-
 }
 
-void Automata::cook()
-{
+void Automata::cook() {
     if (state == CHECK) {
         state = COOK;
         cash -= prices[option];
@@ -88,8 +81,7 @@ void Automata::cook()
     }
 }
 
-void Automata::finish()
-{
+void Automata::finish() {
     if (state == COOK) {
         state = WAIT;
         getCash();
@@ -97,16 +89,13 @@ void Automata::finish()
     }
 }
 
-int Automata::getCash()
-{
+int Automata::getCash() {
     cout << "Your cash is " << cash << endl;
     return cash;
 }
 
-void Automata::getState()
-{
-    switch (state)
-    {
+void Automata::getState() {
+    switch (state) {
         case OFF:
             cout << "The drink machine is off." << endl;
             break;
