@@ -9,9 +9,9 @@ TEST(test1, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = CHECK;
     try {
-        drinking_m.on()
+        drinking_m.on();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -20,9 +20,9 @@ TEST(test2, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = CHECK;
     try {
-        drinking_m.off()
+        drinking_m.off();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -31,10 +31,10 @@ TEST(test3, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = OFF;
     try {
-        drinking_m.coin(100)
+        drinking_m.coin(100);
     }
-    catch(const domain_error& err) {
-        ASSERT_STREQ("Error! Incorrect operation.", err.what());
+    catch(domain_error& err) {
+        ASSERT_STREQ("Error! Incorrect operation.", domain_error.what());
     }
 }
 
@@ -42,9 +42,9 @@ TEST(test4, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = WAIT;
     try {
-        drinking_m.cancel()
+        drinking_m.cancel();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -53,9 +53,9 @@ TEST(test5, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = WAIT;
     try {
-        drinking_m.choice(3)
+        drinking_m.choice(3);
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -64,9 +64,9 @@ TEST(test6, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = ACCEPT;
     try {
-        drinking_m.check()
+        drinking_m.check();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -75,9 +75,9 @@ TEST(test7, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = OFF;
     try {
-        drinking_m.cook()
+        drinking_m.cook();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -86,9 +86,9 @@ TEST(test8, incorrect_operation) {
     Automata drinking_m;
     drinking_m.state = CHECK;
     try {
-        drinking_m.finish()
+        drinking_m.finish();
     }
-    catch(const domain_error& err) {
+    catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
@@ -97,9 +97,9 @@ TEST(test9, incorrect_value) {
     Automata drinking_m;
     drinking_m.state = ACCEPT;
     try {
-        drinking_m.coin(-500)
+        drinking_m.coin(-500);
     }
-    catch(const invalid_argument& err) {
+    catch(invalid_argument& err) {
         ASSERT_STREQ("Error! Incorrect value.", err.what());
     }
 }
@@ -108,9 +108,9 @@ TEST(test10, incorrect_value) {
     Automata drinking_m;
     drinking_m.state = ACCEPT;
     try {
-        drinking_m.choice(15)
+        drinking_m.choice(15);
     }
-    catch(const invalid_argument& err) {
+    catch(invalid_argument& err) {
         ASSERT_STREQ("Error! Incorrect value.", err.what());
     }
 }
@@ -131,7 +131,7 @@ TEST(test12, TrueOrFalse) {
     EXPECT_EQ(false, drinking_m.check());
 }
 
-TEST(test12, all_checks) {
+int main1() {
     Automata drinking_machine;
     drinking_machine.on();
     drinking_machine.coin(1000);
@@ -144,4 +144,8 @@ TEST(test12, all_checks) {
     }
     drinking_machine.off();
     return 0;
+}
+
+TEST(test12, all_checks) {
+    EXPECT_EQ(0, main1());
 }
