@@ -36,7 +36,7 @@ TEST(test3, incorrect_operation) {
         drinking_m.coin(100);
     }
     catch(domain_error& err) {
-        ASSERT_STREQ("Error! Incorrect operation.", domain_error.what());
+        ASSERT_STREQ("Error! Incorrect operation.", err.what());
     }
 }
 
