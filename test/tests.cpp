@@ -107,10 +107,11 @@ TEST(test9, incorrect_value) {
 }
 
 TEST(test10, incorrect_value) {
-    Automata drinking_m;
-    drinking_m.state = ACCEPT;
+    Automata drinking_machine;
+    drinking_machine.on();
+    drinking_machine.coin(1000);
     try {
-        drinking_m.choice(15);
+        drinking_machine.choice(15);
     }
     catch(invalid_argument& err) {
         ASSERT_STREQ("Error! Incorrect value.", err.what());
@@ -118,19 +119,19 @@ TEST(test10, incorrect_value) {
 }
 
 TEST(test11, TrueOrFalse) {
-    Automata drinking_m;
-    drinking_m.state = CHECK;
-    drinking_m.cash = 200;
-    drinking_m.option = 8;
-    EXPECT_EQ(true, drinking_m.check());
+    Automata drinking_machine;
+    drinking_machine.on();
+    drinking_machine.coin(1000);
+    drinking_machine.choice(5);
+    EXPECT_EQ(true, drinking_machine.check());
 }
 
 TEST(test12, TrueOrFalse) {
-    Automata drinking_m;
-    drinking_m.state = CHECK;
-    drinking_m.cash = 10;
-    drinking_m.option = 8;
-    EXPECT_EQ(false, drinking_m.check());
+    Automata drinking_machine;
+    drinking_machine.on();
+    drinking_machine.coin(10);
+    drinking_machine.choice(5);
+    EXPECT_EQ(false, drinking_machine.check());
 }
 
 int main1() {
