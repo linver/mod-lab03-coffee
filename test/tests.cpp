@@ -164,6 +164,6 @@ TEST(test16, states) {
     drinking_machine.choice(5);
     drinking_machine.cook();
     drinking_machine.finish();
-    rinking_machine.off();
+    drinking_machine.off();
     EXPECT_EQ(OFF, drinking_machine.state);
 }
