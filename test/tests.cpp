@@ -108,19 +108,7 @@ TEST(test9, incorrect_value) {
     }
 }
 
-TEST(test10, incorrect_value) {
-    try {
-        Automata drinking_machine;
-        drinking_machine.on();
-        drinking_machine.coin(1000);
-        drinking_machine.choice(15);
-    }
-    catch(invalid_argument& err) {
-        ASSERT_STREQ("Error! Incorrect value.", err.what());
-    }
-}
-
-TEST(test11, TrueOrFalse) {
+TEST(test10, TrueOrFalse) {
     Automata drinking_machine;
     drinking_machine.on();
     drinking_machine.coin(1000);
@@ -128,7 +116,7 @@ TEST(test11, TrueOrFalse) {
     EXPECT_EQ(true, drinking_machine.check());
 }
 
-TEST(test12, TrueOrFalse) {
+TEST(test11, TrueOrFalse) {
     Automata drinking_machine;
     drinking_machine.on();
     drinking_machine.coin(10);
