@@ -1,11 +1,13 @@
 // Copyright 2022 UNN-IASR
 #include <iostream>
 #include <string>
+#include <stdexcept>
 #include "Automata.h"
 
 using std::cout;
 using std::endl;
-
+using std::invalid_argument;
+using std::domain_error;
 
 Automata::Automata() {
     state = OFF;
@@ -26,6 +28,8 @@ void Automata::on() {
         cout << "The drink machine is on." << endl;
         getMenu();
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
@@ -33,14 +37,21 @@ void Automata::off() {
     if (state == WAIT) {
         state = OFF;
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
 void Automata::coin(int money) {
     if (state == WAIT || state == ACCEPT) {
+        if (money < 0) {
+            throw invalid_argument("Error! Incorrect value.");
+        }
         state = ACCEPT;
         cash += money;
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
@@ -50,15 +61,22 @@ void Automata::cancel() {
         cout << "You need more money to buy this drink." << endl;
         getCash();
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
 void Automata::choice(int menu_position) {
     if (state == ACCEPT) {
+        if (sizeof(menu) < menu_position || menu_position <= 0) {
+            throw invalid_argument("Error! Incorrect value.");
+        }
         state = CHECK;
         option = menu_position;
         cout << "Your choice is " << menu[option-1] << endl;
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
@@ -67,9 +85,11 @@ bool Automata::check() {
         if (cash >= prices[option]) {
             return true;
         }
+        getState();
+        return false;
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
-    getState();
-    return false;
 }
 
 void Automata::cook() {
@@ -78,6 +98,8 @@ void Automata::cook() {
         cash -= prices[option];
         getCash();
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
@@ -86,6 +108,8 @@ void Automata::finish() {
         state = WAIT;
         getCash();
         getState();
+    } else {
+        throw domain_error("Error! Incorrect operation.");
     }
 }
 
@@ -116,3 +140,4 @@ void Automata::getState() {
             break;
     }
 }
+
