@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include "Automata.h"
 
+using std::invalid_argument;
+using std::domain_error;
 
 TEST(test1, incorrect_operation) {
     Automata drinking_m;
