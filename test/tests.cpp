@@ -76,10 +76,10 @@ TEST(test6, incorrect_operation) {
 }
 
 TEST(test7, incorrect_operation) {
-    Automata drinking_m;
-    drinking_m.state = OFF;
+    Automata drinking_machine;
+    drinking_machine.state = OFF;
     try {
-        drinking_m.cook();
+        drinking_machine.cook();
     }
     catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
@@ -87,10 +87,10 @@ TEST(test7, incorrect_operation) {
 }
 
 TEST(test8, incorrect_operation) {
-    Automata drinking_m;
-    drinking_m.state = CHECK;
+    Automata drinking_machine;
+    drinking_machine.state = CHECK;
     try {
-        drinking_m.finish();
+        drinking_machine.finish();
     }
     catch(domain_error& err) {
         ASSERT_STREQ("Error! Incorrect operation.", err.what());
@@ -98,10 +98,10 @@ TEST(test8, incorrect_operation) {
 }
 
 TEST(test9, incorrect_value) {
-    Automata drinking_m;
-    drinking_m.state = ACCEPT;
+    Automata drinking_machine;
+    drinking_machine.state = ACCEPT;
     try {
-        drinking_m.coin(-500);
+        drinking_machine.coin(-500);
     }
     catch(invalid_argument& err) {
         ASSERT_STREQ("Error! Incorrect value.", err.what());
@@ -109,38 +109,38 @@ TEST(test9, incorrect_value) {
 }
 
 TEST(test10, states) {
-    Automata drinking_m;
-    drinking_m.on()
-    EXPECT_EQ(WAIT, drinking_m.state);
+    Automata drinking_machine;
+    drinking_machine.on();
+    EXPECT_EQ(WAIT, drinking_machine.state);
 }
 
 TEST(test11, states) {
-    Automata drinking_m;
-    drinking_m.on()
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(1000);
     EXPECT_EQ(ACCEPT, drinking_m.state);
 }
 
 TEST(test12, states) {
-    Automata drinking_m;
-    drinking_m.on()
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(1000);
-    drinking_machine.choice(5); 
+    drinking_machine.choice(5);
     EXPECT_EQ(CHECK, drinking_m.state);
 }
 
 TEST(test13, states) {
-    Automata drinking_m;
-    drinking_m.on()
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(1000);
     drinking_machine.choice(5);
     drinking_machine.cook();
     EXPECT_EQ(COOK, drinking_m.state);
 }
 
-TEST(test13, states) {
-    Automata drinking_m;
-    drinking_m.on()
+TEST(test14, states) {
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(1000);
     drinking_machine.choice(5);
     drinking_machine.cook();
@@ -148,18 +148,18 @@ TEST(test13, states) {
     EXPECT_EQ(WAIT, drinking_m.state);
 }
 
-TEST(test14, states) {
-    Automata drinking_m;
-    drinking_m.on()
+TEST(test15, states) {
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(10);
     drinking_machine.choice(5);
-    drinking_machine.cancel()
+    drinking_machine.cancel();
     EXPECT_EQ(WAIT, drinking_m.state);
 }
 
-TEST(test15, states) {
-    Automata drinking_m;
-    drinking_m.on()
+TEST(test16, states) {
+    Automata drinking_machine;
+    drinking_machine.on();
     drinking_machine.coin(1000);
     drinking_machine.choice(5);
     drinking_machine.cook();
