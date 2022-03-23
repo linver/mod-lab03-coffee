@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include <iostream>
+#include <string>
 #include "Automata.h"
 
 using std::invalid_argument;
@@ -107,10 +109,10 @@ TEST(test9, incorrect_value) {
 }
 
 TEST(test10, incorrect_value) {
-    Automata drinking_machine;
-    drinking_machine.on();
-    drinking_machine.coin(1000);
     try {
+        Automata drinking_machine;
+        drinking_machine.on();
+        drinking_machine.coin(1000);
         drinking_machine.choice(15);
     }
     catch(invalid_argument& err) {
