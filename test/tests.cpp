@@ -108,37 +108,62 @@ TEST(test9, incorrect_value) {
     }
 }
 
-TEST(test10, TrueOrFalse) {
-    Automata drinking_machine;
-    drinking_machine.on();
-    drinking_machine.coin(1000);
-    drinking_machine.choice(5);
-    EXPECT_EQ(true, drinking_machine.check());
+TEST(test10, states) {
+    Automata drinking_m;
+    drinking_m.on()
+    EXPECT_EQ(WAIT, drinking_m.state);
 }
 
-TEST(test11, TrueOrFalse) {
-    Automata drinking_machine;
-    drinking_machine.on();
+TEST(test11, states) {
+    Automata drinking_m;
+    drinking_m.on()
+    drinking_machine.coin(1000);
+    EXPECT_EQ(ACCEPT, drinking_m.state);
+}
+
+TEST(test12, states) {
+    Automata drinking_m;
+    drinking_m.on()
+    drinking_machine.coin(1000);
+    drinking_machine.choice(5); 
+    EXPECT_EQ(CHECK, drinking_m.state);
+}
+
+TEST(test13, states) {
+    Automata drinking_m;
+    drinking_m.on()
+    drinking_machine.coin(1000);
+    drinking_machine.choice(5);
+    drinking_machine.cook();
+    EXPECT_EQ(COOK, drinking_m.state);
+}
+
+TEST(test13, states) {
+    Automata drinking_m;
+    drinking_m.on()
+    drinking_machine.coin(1000);
+    drinking_machine.choice(5);
+    drinking_machine.cook();
+    drinking_machine.finish();
+    EXPECT_EQ(WAIT, drinking_m.state);
+}
+
+TEST(test14, states) {
+    Automata drinking_m;
+    drinking_m.on()
     drinking_machine.coin(10);
     drinking_machine.choice(5);
-    EXPECT_EQ(false, drinking_machine.check());
+    drinking_machine.cancel()
+    EXPECT_EQ(WAIT, drinking_m.state);
 }
 
-int main1() {
-    Automata drinking_machine;
-    drinking_machine.on();
+TEST(test15, states) {
+    Automata drinking_m;
+    drinking_m.on()
     drinking_machine.coin(1000);
     drinking_machine.choice(5);
-    if (drinking_machine.check()) {
-        drinking_machine.cook();
-        drinking_machine.finish();
-    } else {
-        drinking_machine.cancel();
-    }
-    drinking_machine.off();
-    return 0;
-}
-
-TEST(test12, all_checks) {
-    EXPECT_EQ(0, main1());
+    drinking_machine.cook();
+    drinking_machine.finish();
+    rinking_machine.off();
+    EXPECT_EQ(OFF, drinking_m.state);
 }
